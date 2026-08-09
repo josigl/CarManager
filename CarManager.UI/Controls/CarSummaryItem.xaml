@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="CarManager.UI.Controls.CarSummaryItem"
+             x:Name="root"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CarManager.UI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="200"
+             SnapsToDevicePixels="True"
+             UseLayoutRounding="True"
+             RenderOptions.BitmapScalingMode="HighQuality"
+             d:FontFamily="{StaticResource Roboto}">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Icon -->
+        <Path Grid.Column="0"
+              Width="{Binding IconSize, ElementName=root, FallbackValue=30}"
+              Height="{Binding IconSize, ElementName=root, FallbackValue=30}"
+              Stretch="Uniform"
+              Fill="{StaticResource Brush.Accent.Primary}"
+              Data="{Binding Icon, ElementName=root, FallbackValue={StaticResource Icon.Placeholder}}"
+              VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Margin="12 0 0 0">
+            
+            <!-- Value-->
+            <TextBlock Text="{Binding Value, ElementName=root, FallbackValue=Value}" 
+                       FontSize="20"
+                       FontWeight="SemiBold" />
+            
+            <!-- Label -->
+            <TextBlock Text="{Binding Label, ElementName=root, FallbackValue=Label}"
+                       FontSize="15"
+                       Foreground="{StaticResource Brush.Text.Secondary}" 
+                       FontWeight="Medium"/>
+        
+            
+            
+        </StackPanel>
+
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,27 @@
+﻿<Application x:Class="CarManager.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CarManager.UI"
+             StartupUri="Views/CarDetailsWindow.xaml">
+    <Application.Resources>
+    
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+            
+                <!-- Order is important -->
+                <ResourceDictionary Source="/Resources/Colors.xaml" />
+                <ResourceDictionary Source="/Resources/Fonts.xaml" />
+                <ResourceDictionary Source="/Resources/Converters.xaml" />
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="/Styles/Windows.xaml" />
+                <ResourceDictionary Source="/Styles/Buttons.xaml" />
+                
+                <ResourceDictionary Source="/Styles/CarDetailsTab.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    
+    </Application.Resources>
+</Application>

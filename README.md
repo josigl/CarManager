@@ -20,8 +20,8 @@ A modern desktop application for managing premium vehicles, built with WPF and .
 - WPF
 - MVVM
 - XAML
-- Entity Framework Core (planned)
-- SQL Server (planned)
+- Entity Framework Core
+- SQL Server
 
 ## Preview
 

@@ -1,0 +1,543 @@
+﻿<Window x:Class="CarManager.WPF.Views.CarDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarManager.WPF.Views"
+        xmlns:uc="clr-namespace:CarManager.WPF.Controls"
+        xmlns:vm="clr-namespace:CarManager.WPF.ViewModels.CarDetails"
+        xmlns:vc="clr-namespace:CarManager.WPF.Converters"
+        mc:Ignorable="d"
+        Style="{StaticResource Window.Base}"
+        WindowStartupLocation="CenterScreen"
+        Title="Car Details"
+        Height="1000" 
+        Width="1400">
+    
+    <Window.DataContext>
+        <vm:CarDetailsViewModel />
+    </Window.DataContext>
+
+    <Border Padding="40 30">
+
+        <!--        WINDOW-LAYOUT         -->
+        <!-- ============================ -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <!--        HEADER-SECTION        -->
+            <!-- ============================ -->
+            <StackPanel Grid.Row="0">
+
+                <!-- Header Bar -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- ID -->
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Column="0">
+
+
+                        <TextBlock Text="ID" 
+                                   Margin="0 0 10 0"
+                                   Foreground="{StaticResource Brush.Text.Secondary}"
+                                   VerticalAlignment="Center"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"/>
+
+                        <Border Padding="12 4"
+                                BorderThickness="1"
+                                BorderBrush="{StaticResource Brush.Border}"
+                                CornerRadius="4"
+                                Background="{StaticResource Brush.Background.Light}">
+
+
+                            <TextBlock Text="{Binding Id, StringFormat=\#{0}}" 
+                                       FontWeight="SemiBold" 
+                                       VerticalAlignment="Center"/>
+
+                        </Border>
+
+                    </StackPanel>
+
+                    <!-- Status -->
+                    <Border Grid.Column="2"
+                            VerticalAlignment="Center"
+                            Background="{Binding Status, Converter={StaticResource CarStatusToBrushConverter}, ConverterParameter=Background, Mode=OneWay}"
+                            Padding="10 5"
+                            CornerRadius="4">
+
+                        <StackPanel Orientation="Horizontal">
+
+                            <Ellipse Width="6"
+                                     Height="6"
+                                     Margin="0 0 6 0"
+                                     Fill="{Binding Status, Converter={StaticResource CarStatusToBrushConverter}, Mode=OneWay}"
+                                     VerticalAlignment="Center"/>
+
+
+                            <TextBlock Text="{Binding Status, Converter={StaticResource EnumToDisplayNameConverter}, Mode=OneWay}"
+                                       Foreground="{Binding Status, Converter={StaticResource CarStatusToBrushConverter}, Mode=OneWay}"
+                                       FontSize="13"
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                    </Border>
+
+                </Grid>
+
+                <!-- Car description / title -->
+                <TextBlock 
+                    Margin="0 15 0 30"
+                    FontWeight="Bold"
+                    FontSize="35">
+
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} {1} {2}">
+                            <Binding Path="Make" />
+                            <Binding Path="Model" />
+                            <Binding Path="Variant" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                    
+                </TextBlock>
+
+                <!-- Car Summary Items -->
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Mileage -->
+                    <uc:CarSummaryItem
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Label="Mileage"
+                        Value="{Binding Mileage, StringFormat={}{0:N0} km}"
+                        Icon="{StaticResource Icon.Road}" />
+
+                    <!-- Power -->
+                    <uc:CarSummaryItem
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Label="Power"
+                        Icon="{StaticResource Icon.Power}" 
+                        IconSize="36">
+
+                        <uc:CarSummaryItem.Value>
+                            <MultiBinding StringFormat="{}{0} kw ({1} hp)">
+                                <Binding Path="PowerKw" />
+                                <Binding Path="PowerHp" />
+                            </MultiBinding>
+                        </uc:CarSummaryItem.Value>
+                        
+                    </uc:CarSummaryItem>
+
+                    
+                    
+                    <!-- Fuel Type -->
+                    <uc:CarSummaryItem
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        Label="Fuel Type"
+                        Value="{Binding FuelType}"
+                        Icon="{StaticResource Icon.Gas}" 
+                        IconSize="30"/>
+
+                    <!-- Transmission -->
+                    <uc:CarSummaryItem
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Label="Transmission"
+                        Value="{Binding Transmission}"
+                        Icon="{StaticResource Icon.Gearbox}" 
+                        IconSize="34"/>
+
+                    <!-- First Registration -->
+                    <uc:CarSummaryItem
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Label="First Registration"
+                        Value="{Binding FirstRegistration, StringFormat={}{0:MM-yyyy}}"
+                        Icon="{StaticResource Icon.Calender}" 
+                        IconSize="32"/>
+
+                    <!-- Current Value -->
+                    <uc:CarSummaryItem
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        Label="Current Value"
+                        Value="{Binding CurrentValue, StringFormat={}{0:N0} EUR}"
+                        Icon="{StaticResource Icon.PriceTag}" 
+                        IconSize="34"/>
+
+                </Grid>
+
+            </StackPanel>
+
+
+
+            <!--        TABS-SECTION        -->
+            <!-- ============================ -->
+            <TabControl Grid.Row="1"
+                        Margin="0 50 0 0"
+                        BorderThickness="0"
+                        Padding="0 30 0 0">
+
+                <!-- General -->
+                <uc:CarTabItem Header="General" 
+                               Icon="{StaticResource Icon.Tab.General}"
+                               DataContext="{Binding GeneralTab}">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+
+                            <!-- Car Information -->
+                            <TextBlock  Text="Car Information"
+                                        Style="{StaticResource CarTabGroupHeader}" />
+
+                            <StackPanel Style="{StaticResource CarTabGroupItems}">
+                                <uc:CarDetailRow Label="Make" Value="{Binding Make}" />
+                                <uc:CarDetailRow Label="Model" Value="{Binding Model}" />
+                                <uc:CarDetailRow Label="Variant" Value="{Binding Variant}" />
+                                <uc:CarDetailRow Label="Body Type" Value="{Binding BodyType}" />
+                                <uc:CarDetailRow Label="Model Year" Value="{Binding ModelYear}" />
+                                <uc:CarDetailRow Label="First Registration" Value="{Binding FirstRegistration, StringFormat={}{0:yyyy-MM-dd}}" />
+                            </StackPanel>
+
+
+                            <!-- Identication -->
+                            <TextBlock  Text="Identication"
+                                        Style="{StaticResource CarTabGroupHeader}" />
+
+                            <StackPanel Style="{StaticResource CarTabGroupItems}">
+                                <uc:CarDetailRow Label="ID" Value="{Binding Id}" />
+                                <uc:CarDetailRow Label="VIN" Value="{Binding Vin}" />
+                                <uc:CarDetailRow Label="License Plate" Value="{Binding LicensePlate}" />
+                            </StackPanel>
+
+
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Column="2">
+
+                            <!-- Classification -->
+                            <TextBlock  Text="Classification"
+                                        Style="{StaticResource CarTabGroupHeader}" />
+
+                            <StackPanel Style="{StaticResource CarTabGroupItems}">
+                                <uc:CarDetailRow Label="Condition" Value="{Binding Condition}" />
+                                <uc:CarDetailRow Label="Status" Value="{Binding Status, Converter={StaticResource EnumToDisplayNameConverter}, Mode=OneWay}" />
+                                <uc:CarDetailRow Label="Previous Owners" Value="{Binding PreviousOwners}" />
+                                <uc:CarDetailRow Label="Location" Value="{Binding Location}" />
+                            </StackPanel>
+
+                            <!-- Actions -->
+                            <StackPanel Margin="0">
+                                <Button Style="{StaticResource Button.Base}" Content="Generate PDF Summary" />
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Grid>
+
+
+                </uc:CarTabItem>
+
+                <!-- Technical -->
+                <uc:CarTabItem  Header="Technical" 
+                                Icon="{StaticResource Icon.Tab.Technical}">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Data Table -->
+                        <ScrollViewer Grid.Column="0"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Auto">
+
+                            <StackPanel>
+
+                                <!-- Technical Data -->
+                                <TextBlock  Text="Technical Data"
+                                                Style="{StaticResource CarTabGroupHeader}" />
+
+                                <StackPanel Style="{StaticResource CarTabGroupItems}">
+                                    <uc:CarDetailRow Label="Power" Value="386 kw (518 hp)" />
+                                    <uc:CarDetailRow Label="Torque" Value="465 Nm" />
+                                    <uc:CarDetailRow Label="Acceleration 0–100 km/h" Value="3.2 s" />
+                                    <uc:CarDetailRow Label="Top Speed" Value="296 km/h" />
+                                    <uc:CarDetailRow Label="Transmission" Value="7-Speed PDK" />
+                                    <uc:CarDetailRow Label="Drive Type" Value="Rear-Wheel Drive (RWD)" />
+                                    <uc:CarDetailRow Label="Energy Source" Value="Petrol" />
+                                    <uc:CarDetailRow Label="Curb Weight" Value="1.450 kg" />
+                                    <uc:CarDetailRow Label="Trunk Capacity" Value="132 l" />
+                                    <uc:CarDetailRow Label="Exterior Color" Value="Ice Grey Metallic" />
+                                    <uc:CarDetailRow Label="Interior Color" Value="Black Leather / Race-Tex" />
+                                </StackPanel>
+
+                                <!-- Engine &  Powertrain -->
+                                <StackPanel Style="{StaticResource CarTabGroupItems}">
+
+                                    <TextBlock  Text="Engine &amp; Powertrain"
+                                            Style="{StaticResource CarTabGroupHeader}" />
+
+                                    <uc:CarDetailRow Label="Powertrain Type" Value="Combustion" />
+
+                                    <!-- Combustion -->
+                                    <StackPanel Visibility="Visible">
+                                        <uc:CarDetailRow Label="Engine Type"            Value="Naturally Aspirated Flat-6 Boxer" />
+                                        <uc:CarDetailRow Label="Displacement"           Value="3.996 cm³" />
+                                        <uc:CarDetailRow Label="Cylinders"              Value="6" />
+                                        <uc:CarDetailRow Label="Fuel Tank Capacity"     Value="64 l" />
+                                        <uc:CarDetailRow Label="Fuel Consumption"       Value="13,2 l/100 km" />
+                                        <uc:CarDetailRow Label="CO₂ Emissions"          Value="299 g/km" />
+                                        <uc:CarDetailRow Label="Emission Standard"      Value="Euro 6e" />
+                                    </StackPanel>
+
+                                    <!-- Electric -->
+                                    <StackPanel Visibility="Visible">
+                                        <uc:CarDetailRow Label="Motor Type"             Value="Dual Permanent Magnet Motors" />
+                                        <uc:CarDetailRow Label="Battery Capacity"       Value="105 kWh" />
+                                        <uc:CarDetailRow Label="Usable Capacity"        Value="97 kWh" />
+                                        <uc:CarDetailRow Label="Range (WLTP)"           Value="630 km" />
+                                        <uc:CarDetailRow Label="Energy Consumption"     Value="18,7 kWh / 100 km" />
+                                        <uc:CarDetailRow Label="Charging Power (AC)"    Value="11 kW" />
+                                        <uc:CarDetailRow Label="Charging Power (DC)"    Value="320 kW" />
+                                    </StackPanel>
+                                    
+                                    <!-- Hybrid -->
+                                    <StackPanel Visibility="Visible">
+                                        <uc:CarDetailRow Label="Engine Type"            Value="2.0 l Inline-4" />
+                                        <uc:CarDetailRow Label="Displacement"           Value="1.987 cm³" />
+                                        <uc:CarDetailRow Label="Battery Type"           Value="Lithium-Ion" />
+                                        <uc:CarDetailRow Label="Battery Capacity"       Value="1,1 kWh" />
+                                        <uc:CarDetailRow Label="Fuel Consumption"       Value="4,5 l/100 km" />
+                                        <uc:CarDetailRow Label="CO₂ Emissions"          Value="102 g/km" />
+                                        <uc:CarDetailRow Label="Emission Standard"      Value="Euro 6e" />
+                                    </StackPanel>
+
+                                    <!-- Plug-in-Hybrid -->
+                                    <StackPanel Visibility="Visible">
+                                        <uc:CarDetailRow Label="Engine Type"            Value="2.0 l Turbo Inline-4" />
+                                        <uc:CarDetailRow Label="Displacement"           Value="1.998 cm³" />
+                                        <uc:CarDetailRow Label="Battery Capacity"       Value="19,5 kWh" />
+                                        <uc:CarDetailRow Label="Electric Range"         Value="101 km" />
+                                        <uc:CarDetailRow Label="Fuel Consumption"       Value="0,8 l / 100 km" />
+                                        <uc:CarDetailRow Label="Enerty Consumption"     Value="22,5 kWh / 100 km" />
+                                        <uc:CarDetailRow Label="CO₂ Emissions"          Value="19 g/km" />
+                                        <uc:CarDetailRow Label="Emission Standard"      Value="Euro 6e" />
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </ScrollViewer>
+
+                        <!-- Metric Items -->
+                        <Grid Grid.Column="2">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+
+                            <!-- Acceleration -->
+                            <uc:CarMetricItem Grid.Row="0" Label="Acceleration" Value="3.2 s" />
+
+                            <!-- Top Speed -->
+                            <uc:CarMetricItem Grid.Row="1" Label="Top Speed" Value="296 km/h" />
+
+                            <!-- Consumption -->
+                            <uc:CarMetricItem Grid.Row="2"  Label="Fuel Consumption" Value="13.2 l/100 km" />
+
+                        </Grid>
+
+                    </Grid>
+
+                </uc:CarTabItem>
+
+                <!-- Commercial -->
+                <uc:CarTabItem  Header="Commercial" 
+                                Icon="{StaticResource Icon.Tab.Commercial}">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <!-- Card Grid -->
+                            <Grid Grid.Row="0"
+                                  HorizontalAlignment="Left">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <!-- Current Value -->
+                                <uc:CarCommercialMetricItem
+                                Style="{StaticResource CarCommercialMetricCard.Highlighted}"
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Label="Current Value"
+                                Value="329,990 EUR" 
+                                InfoText="351.904,68 USD (06.08.2026)"
+                                InfoIcon="{StaticResource Icon.ExchangeRate}"/>
+
+                                <!-- Purchase Value -->
+                                <uc:CarCommercialMetricItem 
+                                Grid.Column="2"
+                                Grid.Row="0"
+                                Label="Purchase Value"
+                                Value="309,950 EUR"
+                                InfoText="Purchased 2026-04-01"
+                                InfoIcon="{StaticResource Icon.PurchaseDate}"/>
+
+                                <!-- Value Change -->
+                                <uc:CarCommercialMetricItem 
+                                Grid.Column="0"
+                                Grid.Row="2"
+                                Label="Value Change"
+                                Value="+20,040 EUR"
+                                InfoText="6.5%"
+                                InfoIcon="{StaticResource Icon.ArrowUp}"/>
+
+                                <!-- Total Cost of Ownership Change -->
+                                <uc:CarCommercialMetricItem 
+                                Grid.Column="2"
+                                Grid.Row="2"
+                                Label="Annual Running Costs"
+                                Value="9,426 EUR"
+                                InfoText="786.50 EUR/month"
+                                InfoIcon="{StaticResource Icon.CarTco}"/>
+
+                            </Grid>
+
+                            <ScrollViewer 
+                                Grid.Row="2"
+                                HorizontalScrollBarVisibility="Hidden"
+                                VerticalScrollBarVisibility="Auto">
+                                
+                                <StackPanel>
+                                    <!-- Purachse Information -->
+                                    <TextBlock  Text="Purachse Information"
+                                                Style="{StaticResource CarTabGroupHeader}" />
+
+                                    <StackPanel Style="{StaticResource CarTabGroupItems}">
+                                        <uc:CarDetailRow Label="Dealer" Value="Porsche Zentrum Hamburg" />
+                                        <uc:CarDetailRow Label="Invoice No." Value="INV-2025-00481" />
+                                        <uc:CarDetailRow Label="Warranty Until" Value="2029-05-01" />
+                                    </StackPanel>
+
+                                    <!-- Annual Running Costs -->
+                                    <TextBlock  Text="Annual Running Costs"
+                                                Style="{StaticResource CarTabGroupHeader}" />
+
+                                    <StackPanel Style="{StaticResource CarTabGroupItems}">
+                                        <uc:CarDetailRow Label="Insurance" Value="3,600 EUR" />
+                                        <uc:CarDetailRow Label="Road Tax" Value="246 EUR" />
+                                        <uc:CarDetailRow Label="Fuel Costs" Value="4,380 EUR" />
+                                        <uc:CarDetailRow Label="Maintenance Costs" Value="1,200 EUR" />
+                                    </StackPanel>
+                                    
+                                </StackPanel>
+                                
+                            </ScrollViewer>
+
+                        </Grid>
+
+                        
+                        <!-- Timeline -->
+                        <Grid Grid.Column="2"
+                              HorizontalAlignment="Right"
+                              Margin="100 0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <uc:CarTimeLineItem 
+                                Grid.Row="0"
+                                Label="First Registration"
+                                Value="2026-05-01"
+                                CheckIcon="{StaticResource Icon.Circle.Check}"/>
+
+                            <uc:CarTimeLineItem 
+                                Grid.Row="1"
+                                Label="Last Service"
+                                Value="No service yet"
+                                CheckIcon="{StaticResource Icon.Circle}"/>
+                            
+                            <uc:CarTimeLineItem 
+                                Grid.Row="2"
+                                Label="Next Service Due" 
+                                Value="2026-11-01"
+                                InfoText="Recommended next scheduled maintenance"
+                                CheckIcon="{StaticResource Icon.Circle}"/>
+
+                        </Grid>
+                        
+                    </Grid>
+
+                </uc:CarTabItem>
+
+            </TabControl>
+
+
+        </Grid>
+
+    </Border>
+
+</Window>

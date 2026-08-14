@@ -15,4 +15,55 @@ namespace CarManager.Core.Enums
         [Display(Name = "Sold")]
         Sold
     }
+
+    public enum CarBodyType
+    {
+        Coupe,
+        Convertible,
+        Sedan,
+        Suv,
+        Wagon,
+        Hatchback
+    }
+
+    public enum CarCondition
+    {
+        New,
+        Excellent,
+        Good,
+        Fair
+    }
+
+    public enum CarDriveType
+    {
+        FWD,
+        RWD,
+        AWD
+    }
+
+    public enum CarFuelType
+    {
+        Petrol,
+        Diesel,
+        Hydrogen
+    }
+
+    public enum CarPowerTrain
+    {
+        ICE,
+        MHEV,
+        HEV,
+        PHEV,
+        BEV,
+        FCEV
+    }
+
+    public enum CarTransmissionType
+    {
+        Manual,
+        Automatic,
+        DualClutch,
+        CVT,
+        SingleSpeed
+    }
 }

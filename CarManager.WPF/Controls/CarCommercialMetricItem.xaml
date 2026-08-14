@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="CarManager.WPF.Controls.CarCommercialMetricItem"
+             x:Name="root"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CarManager.WPF.Controls"
+             mc:Ignorable="d"
+             SnapsToDevicePixels="True"
+             UseLayoutRounding="True"
+             Background="Transparent"
+             d:DesignHeight="150" d:DesignWidth="300"
+             d:FontFamily="{StaticResource Roboto}">
+
+    <Grid MinWidth="300"
+          MaxWidth="500">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Border
+            Padding="20 18"
+            CornerRadius="12"
+            Background="{Binding CardBackground, 
+                        ElementName=root,
+                        FallbackValue={StaticResource Brush.Background.Light},
+                        TargetNullValue={StaticResource Brush.Background.Light}}">
+
+            <StackPanel>
+                
+                <!-- Label -->
+                <TextBlock 
+                    Grid.Row="0"
+                    Text="{Binding Label, ElementName=root, FallbackValue=Label}" 
+                    Foreground="{Binding Foreground, 
+                                ElementName=root,
+                                FallbackValue={StaticResource Brush.Text.Main},
+                                TargetNullValue={StaticResource Brush.Text.Main}}"
+                    FontWeight="Medium"
+                    FontSize="15"/>
+
+                <!-- Value -->
+                <TextBlock 
+                    Grid.Row="1"
+                    Text="{Binding Value, ElementName=root, FallbackValue=0.00 EUR}" 
+                    Foreground="{Binding Foreground, 
+                                ElementName=root,
+                                FallbackValue={StaticResource Brush.Text.Main},
+                                TargetNullValue={StaticResource Brush.Text.Main}}"
+                    FontWeight="Bold"
+                    FontSize="28"/>
+
+                <!-- Card info -->
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 20 0 0">
+                    
+                    <!-- Icon -->
+                    <Path Data="{Binding InfoIcon, 
+                                ElementName=root, 
+                                FallbackValue={StaticResource Icon.Placeholder}}"
+                          Fill="{Binding InfoForeground, 
+                                ElementName=root, 
+                                TargetNullValue={StaticResource Brush.Text.Secondary},
+                                FallbackValue={StaticResource Brush.Text.Secondary}}"
+                          Width="{Binding InfoIconSize,
+                                  ElementName=root,
+                                  FallbackValue=20}"
+                          Height="{Binding InfoIconSize,
+                                  ElementName=root,
+                                  FallbackValue=20}"
+                          Stretch="Uniform"
+                          VerticalAlignment="Center"/>
+                    
+                    <!-- Info text -->
+                    <TextBlock Text="{Binding InfoText, 
+                                    ElementName=root,
+                                    FallbackValue=This is some info text}"
+                               Foreground="{Binding InfoForeground, 
+                                            ElementName=root, 
+                                            TargetNullValue={StaticResource Brush.Text.Secondary},
+                                            FallbackValue={StaticResource Brush.Text.Secondary}}"
+                               Margin="8 0"
+                               FontWeight="Regular"
+                               FontSize="13"
+                               VerticalAlignment="Center"/>
+
+                </StackPanel>
+
+            </StackPanel>
+
+        </Border>
+
+    </Grid>
+</UserControl>

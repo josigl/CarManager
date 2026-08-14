@@ -1,0 +1,24 @@
+﻿<Window x:Class="CarManager.WPF.Views.CarOverviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarManager.WPF.Views"
+        mc:Ignorable="d"
+        Style="{StaticResource Window.Base}"
+        WindowStartupLocation="CenterScreen"
+        Title="Car Overview"
+        Height="1000" 
+        Width="1400">
+    <Grid>
+
+        <Border Padding="40 30">
+
+            <DataGrid>
+                
+            </DataGrid>
+            
+        </Border>
+
+    </Grid>
+</Window>

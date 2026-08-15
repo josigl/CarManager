@@ -23,6 +23,22 @@ A modern desktop application for managing premium vehicles, built with WPF and .
 - Entity Framework Core
 - SQL Server
 
+## Demo Data
+
+The repository includes a curated demo dataset with 120 premium, performance, and luxury vehicles.
+
+The dataset contains:
+- General vehicle data
+- Technical specifications
+- Commercial data
+- Vehicle timeline events
+
+The seed data is provided in:
+
+`/data/CarManager_Seed_Master_Car_120.xlsx`
+
+The dataset is intended for portfolio and demonstration purposes. Technical and commercial values are realistic demo data and should not be treated as official manufacturer specifications, dealer quotes, appraisals, insurance offers, or tax calculations.
+
 ## Preview
 
 <img width="1381" height="987" alt="image" src="https://github.com/user-attachments/assets/57c0391a-592f-4b00-9da1-fc91bc5cce37" />

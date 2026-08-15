@@ -12,6 +12,9 @@ namespace CarManager.Infrastructure.Data.Configurations
 
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.Id)
+                .UseIdentityColumn(seed: 1001, increment: 1);
+
             builder.Property(x => x.Make)
                 .HasMaxLength(50)
                 .IsRequired();

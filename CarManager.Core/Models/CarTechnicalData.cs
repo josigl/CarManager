@@ -10,7 +10,7 @@ namespace CarManager.Core.Models
 
         // General Technical Data
         public int PowerKw { get; set; }
-        public int TorgueNm { get; set; }
+        public int TorqueNm { get; set; }
         public decimal Acceleration { get; set; }
         public int TopSpeedKmh { get; set; }
         public CarTransmissionType TransmissionType { get; set; }

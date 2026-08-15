@@ -28,7 +28,7 @@ namespace CarManager.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1001L);
 
                     b.Property<int>("BodyType")
                         .HasColumnType("int");
@@ -219,7 +219,7 @@ namespace CarManager.Infrastructure.Migrations
                     b.Property<int>("TopSpeedKmh")
                         .HasColumnType("int");
 
-                    b.Property<int>("TorgueNm")
+                    b.Property<int>("TorqueNm")
                         .HasColumnType("int");
 
                     b.Property<int>("TransmissionType")

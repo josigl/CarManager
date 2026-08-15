@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarManager.Infrastructure.Migrations
 {
     [DbContext(typeof(CarManagerDbContext))]
-    [Migration("20260813094501_AddTechnicalData")]
-    partial class AddTechnicalData
+    [Migration("20260815092614_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace CarManager.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1001L);
 
                     b.Property<int>("BodyType")
                         .HasColumnType("int");
@@ -84,6 +84,54 @@ namespace CarManager.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Car", (string)null);
+                });
+
+            modelBuilder.Entity("CarManager.Core.Models.CarCommercialData", b =>
+                {
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("AnnualFuelCost")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<decimal>("AnnualInsuranceCost")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<decimal>("AnnualMaintenanceCost")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<decimal>("AnnualRoadTax")
+                        .HasPrecision(8, 2)
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<decimal>("CurrentValue")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("Dealer")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("InvoiceNo")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<DateOnly>("PurchaseDate")
+                        .HasColumnType("date");
+
+                    b.Property<decimal>("PurchasePrice")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateOnly?>("WarrantyUntil")
+                        .HasColumnType("date");
+
+                    b.HasKey("CarId");
+
+                    b.ToTable("CarCommercialData", (string)null);
                 });
 
             modelBuilder.Entity("CarManager.Core.Models.CarTechnicalData", b =>
@@ -174,7 +222,7 @@ namespace CarManager.Infrastructure.Migrations
                     b.Property<int>("TopSpeedKmh")
                         .HasColumnType("int");
 
-                    b.Property<int>("TorgueNm")
+                    b.Property<int>("TorqueNm")
                         .HasColumnType("int");
 
                     b.Property<int>("TransmissionType")
@@ -192,6 +240,48 @@ namespace CarManager.Infrastructure.Migrations
                     b.ToTable("CarTechnicalData", (string)null);
                 });
 
+            modelBuilder.Entity("CarManager.Core.Models.CarTimelineItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("CarTimelineItem", (string)null);
+                });
+
+            modelBuilder.Entity("CarManager.Core.Models.CarCommercialData", b =>
+                {
+                    b.HasOne("CarManager.Core.Models.Car", null)
+                        .WithOne("CommercialData")
+                        .HasForeignKey("CarManager.Core.Models.CarCommercialData", "CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CarManager.Core.Models.CarTechnicalData", b =>
                 {
                     b.HasOne("CarManager.Core.Models.Car", null)
@@ -201,10 +291,24 @@ namespace CarManager.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("CarManager.Core.Models.CarTimelineItem", b =>
+                {
+                    b.HasOne("CarManager.Core.Models.Car", null)
+                        .WithMany("TimelineItems")
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CarManager.Core.Models.Car", b =>
                 {
+                    b.Navigation("CommercialData")
+                        .IsRequired();
+
                     b.Navigation("TechnicalData")
                         .IsRequired();
+
+                    b.Navigation("TimelineItems");
                 });
 #pragma warning restore 612, 618
         }

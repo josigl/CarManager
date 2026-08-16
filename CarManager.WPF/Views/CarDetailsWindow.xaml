@@ -6,17 +6,15 @@
         xmlns:local="clr-namespace:CarManager.WPF.Views"
         xmlns:uc="clr-namespace:CarManager.WPF.Controls"
         xmlns:vm="clr-namespace:CarManager.WPF.ViewModels.CarDetails"
+        xmlns:vmd="clr-namespace:CarManager.WPF.ViewModels.Design"
         xmlns:vc="clr-namespace:CarManager.WPF.Converters"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vmd:CarDetailsDesignViewModel,IsDesignTimeCreatable=True}"
         Style="{StaticResource Window.Base}"
         WindowStartupLocation="CenterScreen"
         Title="Car Details"
         Height="1000" 
         Width="1400">
-    
-    <Window.DataContext>
-        <vm:CarDetailsViewModel />
-    </Window.DataContext>
 
     <Border Padding="40 30">
 
@@ -143,7 +141,7 @@
                         IconSize="36">
 
                         <uc:CarSummaryItem.Value>
-                            <MultiBinding StringFormat="{}{0} kw ({1} hp)">
+                            <MultiBinding StringFormat="{}{0} kW ({1} hp)">
                                 <Binding Path="PowerKw" />
                                 <Binding Path="PowerHp" />
                             </MultiBinding>

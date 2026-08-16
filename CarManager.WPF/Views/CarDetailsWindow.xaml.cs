@@ -5,9 +5,10 @@ namespace CarManager.WPF.Views
 {
     public partial class CarDetailsWindow : Window
     {
-        public CarDetailsWindow()
+        public CarDetailsWindow(CarDetailsViewModel viewModel)
         {
             InitializeComponent();
+            this.DataContext = viewModel;
         }
     }
 }

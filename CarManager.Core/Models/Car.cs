@@ -11,6 +11,7 @@ namespace CarManager.Core.Models
         public string? Variant { get; set; }
         public CarBodyType BodyType { get; set; }
         public int ModelYear { get; set; }
+        public int Mileage { get; set; }
         public DateTime FirstRegistration { get; set; }
         public required string Vin { get; set; }
         public string? LicensePlate { get; set; }

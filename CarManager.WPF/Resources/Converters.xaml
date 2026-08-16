@@ -4,5 +4,6 @@
 
     <converters:CarStatusToBrushConverter x:Key="CarStatusToBrushConverter" />
     <converters:EnumToDisplayNameConverter x:Key="EnumToDisplayNameConverter" />
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
 </ResourceDictionary>

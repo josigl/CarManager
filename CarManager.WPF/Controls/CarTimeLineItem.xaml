@@ -66,7 +66,7 @@
                     Width="36"
                     Height="36"
                     CornerRadius="100"
-                    Background="White"
+                    Background="{StaticResource Brush.Background.Surface}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
 

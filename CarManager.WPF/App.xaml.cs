@@ -4,6 +4,7 @@ using CarManager.Infrastructure.Data;
 using CarManager.Infrastructure.Repositories;
 using CarManager.WPF.Factories;
 using CarManager.WPF.ViewModels.CarDetails;
+using CarManager.WPF.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

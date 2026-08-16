@@ -18,6 +18,9 @@
 
     <!-- Backgrounds & Borders -->
     <!-- ====================== -->
+    <Color x:Key="Color.Background.Surface">#FFFFFF</Color>
+    <SolidColorBrush x:Key="Brush.Background.Surface" Color="{StaticResource Color.Background.Surface}" />
+
     <Color x:Key="Color.Border">#DDE3EA</Color>
     <SolidColorBrush x:Key="Brush.Border" Color="{StaticResource Color.Border}" />
 

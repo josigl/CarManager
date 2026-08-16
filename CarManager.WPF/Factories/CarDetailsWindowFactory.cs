@@ -21,17 +21,19 @@ namespace CarManager.WPF.Factories
         {
             var scope = _scopeFactory.CreateScope();
 
-            var viewModel = scope.ServiceProvider.GetRequiredService<CarDetailsViewModel>();
-            if (carId == null)
-                viewModel.InitializeNew();
-            else
-                await viewModel.InitializeFromExistingAsync(carId.Value);
+            var viewModel = scope.ServiceProvider
+                .GetRequiredService<CarDetailsViewModel>();
 
             var window = new CarDetailsWindow(viewModel);
 
             window.Closed += (_, _) => scope.Dispose();
 
             window.Show();
+
+            if (carId is null)
+                viewModel.InitializeNew();
+            else
+                await viewModel.InitializeFromExistingAsync(carId.Value);
         }
     }
 }

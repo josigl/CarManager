@@ -60,10 +60,15 @@ namespace CarManager.Core.Enums
 
     public enum CarTransmissionType
     {
+        [Display(Name = "Manual")]
         Manual,
+        [Display(Name = "Automatic")]
         Automatic,
+        [Display(Name = "Dual Clutch")]
         DualClutch,
+        [Display(Name = "CVT")]
         CVT,
+        [Display(Name = "Single Speed")]
         SingleSpeed
     }
 }

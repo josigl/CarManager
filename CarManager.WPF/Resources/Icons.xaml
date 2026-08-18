@@ -46,7 +46,11 @@
     
     <!-- Commercial KPIs -->
     <Geometry x:Key="Icon.ArrowUp">
-        M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z
+        M434.5-151.87v-481.98L215.76-415.11 151.87-480 480-808.13 808.13-480l-63.89 64.89L525.5-633.85v481.98h-91Z
+    </Geometry>
+
+    <Geometry x:Key="Icon.ArrowDown">
+        M434.5-808.13v481.98L215.76-544.89 151.87-480 480-151.87 808.13-480l-63.89-64.89L525.5-326.15v-481.98h-91Z
     </Geometry>
 
     <Geometry x:Key="Icon.PurchaseDate">

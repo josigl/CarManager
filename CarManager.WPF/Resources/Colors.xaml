@@ -67,5 +67,12 @@
     <Color x:Key="Color.Accent.Primary">#3874FF</Color>
     <SolidColorBrush x:Key="Brush.Accent.Primary" Color="{StaticResource Color.Accent.Primary}" />
 
+    <!--  Value Indicators -->
+    <!-- ====================== -->
+    <Color x:Key="Color.Value.Positive">#16A36A</Color>
+    <SolidColorBrush x:Key="Brush.Value.Positive" Color="{StaticResource Color.Value.Positive}" />
+
+    <Color x:Key="Color.Value.Negative">#D64545</Color>
+    <SolidColorBrush x:Key="Brush.Value.Negative" Color="{StaticResource Color.Value.Negative}" />
 
 </ResourceDictionary>

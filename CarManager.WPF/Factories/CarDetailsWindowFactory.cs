@@ -30,9 +30,7 @@ namespace CarManager.WPF.Factories
 
             window.Show();
 
-            if (carId is null)
-                viewModel.InitializeNew();
-            else
+            if (carId is not null)
                 await viewModel.InitializeFromExistingAsync(carId.Value);
         }
     }

@@ -16,7 +16,7 @@
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
                 <ResourceDictionary Source="/Styles/Windows.xaml" />
                 <ResourceDictionary Source="/Styles/Buttons.xaml" />
-                
+                <ResourceDictionary Source="/Styles/LoadingSpinners.xaml" />
                 <ResourceDictionary Source="/Styles/CarDetailsTab.xaml" />
 
             </ResourceDictionary.MergedDictionaries>

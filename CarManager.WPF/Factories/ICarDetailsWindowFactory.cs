@@ -7,7 +7,5 @@ namespace CarManager.WPF.Factories
     public interface ICarDetailsWindowFactory
     {
         Task ShowExistingAsync(int carId);
-
-        Task ShowNewAsync();
     }
 }

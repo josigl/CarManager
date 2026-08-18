@@ -5,5 +5,8 @@
     <converters:CarStatusToBrushConverter x:Key="CarStatusToBrushConverter" />
     <converters:EnumToDisplayNameConverter x:Key="EnumToDisplayNameConverter" />
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <converters:ValueChangeIconConverter x:Key="ValueChangeIconConverter" />
+    <converters:ValueChangeBrushConverter x:Key="ValueChangeBrushConverter" />
+    <converters:TimelineIconConverter x:Key="TimelineIconConverter" />
 
 </ResourceDictionary>
